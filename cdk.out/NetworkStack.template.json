@@ -1,0 +1,909 @@
+{
+ "Resources": {
+  "NetworkvpcCC65534B": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/Resource"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet1Subnet3EAF3244": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-north-1a",
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-9-publicSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/Subnet"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet1RouteTableD4BF1F11": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/RouteTable"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet1RouteTableAssociation2ACD26E6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet1RouteTableD4BF1F11"
+    },
+    "SubnetId": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet1Subnet3EAF3244"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/RouteTableAssociation"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet1DefaultRoute1C6E4719": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkvpcIGWFEE87DAF"
+    },
+    "RouteTableId": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet1RouteTableD4BF1F11"
+    }
+   },
+   "DependsOn": [
+    "NetworkvpcVPCGW6D90D482"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/DefaultRoute"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet2Subnet5728CCFB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-north-1b",
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-9-publicSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/Subnet"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet2RouteTable5A7D7D20": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/RouteTable"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet2RouteTableAssociation1A7384B6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet2RouteTable5A7D7D20"
+    },
+    "SubnetId": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet2Subnet5728CCFB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/RouteTableAssociation"
+   }
+  },
+  "Networkvpcstaging9publicSubnetSubnet2DefaultRouteCB09FA69": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkvpcIGWFEE87DAF"
+    },
+    "RouteTableId": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet2RouteTable5A7D7D20"
+    }
+   },
+   "DependsOn": [
+    "NetworkvpcVPCGW6D90D482"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/DefaultRoute"
+   }
+  },
+  "Networkvpcstaging9isolatedSubnetSubnet1SubnetEE8E4AEA": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-north-1a",
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-9-isolatedSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1/Subnet"
+   }
+  },
+  "Networkvpcstaging9isolatedSubnetSubnet1RouteTable38879781": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1/RouteTable"
+   }
+  },
+  "Networkvpcstaging9isolatedSubnetSubnet1RouteTableAssociationCDD44245": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "Networkvpcstaging9isolatedSubnetSubnet1RouteTable38879781"
+    },
+    "SubnetId": {
+     "Ref": "Networkvpcstaging9isolatedSubnetSubnet1SubnetEE8E4AEA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1/RouteTableAssociation"
+   }
+  },
+  "Networkvpcstaging9isolatedSubnetSubnet2SubnetD5D300CA": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-north-1b",
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-9-isolatedSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2/Subnet"
+   }
+  },
+  "Networkvpcstaging9isolatedSubnetSubnet2RouteTable4A85A378": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2/RouteTable"
+   }
+  },
+  "Networkvpcstaging9isolatedSubnetSubnet2RouteTableAssociationAE8BFDC8": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "Networkvpcstaging9isolatedSubnetSubnet2RouteTable4A85A378"
+    },
+    "SubnetId": {
+     "Ref": "Networkvpcstaging9isolatedSubnetSubnet2SubnetD5D300CA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2/RouteTableAssociation"
+   }
+  },
+  "NetworkvpcIGWFEE87DAF": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     },
+     {
+      "Key": "Name",
+      "Value": "NetworkStack/Network/vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/IGW"
+   }
+  },
+  "NetworkvpcVPCGW6D90D482": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "NetworkvpcIGWFEE87DAF"
+    },
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/VPCGW"
+   }
+  },
+  "NetworkvpcRestrictDefaultSecurityGroupCustomResource05478EE7": {
+   "Type": "Custom::VpcRestrictDefaultSG",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E",
+      "Arn"
+     ]
+    },
+    "DefaultSecurityGroupId": {
+     "Fn::GetAtt": [
+      "NetworkvpcCC65534B",
+      "DefaultSecurityGroup"
+     ]
+    },
+    "Account": "127026930178"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpc/RestrictDefaultSecurityGroupCustomResource/Default"
+   }
+  },
+  "Networkcluster20284901": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterName": "staging-9-ecsCluster",
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/cluster/Resource"
+   }
+  },
+  "NetworkloadbalancerSecurityGroup15F19417": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Public access to the load balancer.",
+    "GroupName": "staging-9-loadbalancerSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadbalancerSecurityGroup/Resource"
+   }
+  },
+  "NetworkingressToLoadbalancer22794D65": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "CidrIp": "0.0.0.0/0",
+    "GroupId": {
+     "Fn::GetAtt": [
+      "NetworkloadbalancerSecurityGroup15F19417",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "-1"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/ingressToLoadbalancer"
+   }
+  },
+  "NetworkloadbalancerDDA9CA50": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "staging-9-loadbalancer",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "NetworkloadbalancerSecurityGroup15F19417",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "Networkvpcstaging9publicSubnetSubnet1Subnet3EAF3244"
+     },
+     {
+      "Ref": "Networkvpcstaging9publicSubnetSubnet2Subnet5728CCFB"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "Networkvpcstaging9publicSubnetSubnet1DefaultRoute1C6E4719",
+    "Networkvpcstaging9publicSubnetSubnet1RouteTableAssociation2ACD26E6",
+    "Networkvpcstaging9publicSubnetSubnet2DefaultRouteCB09FA69",
+    "Networkvpcstaging9publicSubnetSubnet2RouteTableAssociation1A7384B6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadbalancer/Resource"
+   }
+  },
+  "NetworkloadbalancerhttpListenerC6D4FF5F": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "NetworkdefaultTargetGroup6F791668"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "NetworkloadbalancerDDA9CA50"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadbalancer/httpListener/Resource"
+   }
+  },
+  "NetworkdefaultTargetGroup6F791668": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckIntervalSeconds": 10,
+    "HealthCheckTimeoutSeconds": 5,
+    "HealthyThresholdCount": 2,
+    "Name": "staging-9-no-op-targetGroup",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Tags": [
+     {
+      "Key": "environment",
+      "Value": "staging-9"
+     }
+    ],
+    "TargetGroupAttributes": [
+     {
+      "Key": "deregistration_delay.timeout_seconds",
+      "Value": "5"
+     },
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/defaultTargetGroup/Resource"
+   }
+  },
+  "NetworkvpcId97290EC4": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-vpcId",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "NetworkvpcCC65534B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/vpcId/Resource"
+   }
+  },
+  "NetworkhttpListener4A30BB17": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-httpListenerArn",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "NetworkloadbalancerhttpListenerC6D4FF5F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/httpListener/Resource"
+   }
+  },
+  "NetworkhttpsListenerA7E1A66C": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-httpsListenerArn",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": "null"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/httpsListener/Resource"
+   }
+  },
+  "NetworkloadBalancerSecurityGroupIdB25E2045": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-loadBalancerSecurityGroupId",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Fn::GetAtt": [
+      "NetworkloadbalancerSecurityGroup15F19417",
+      "GroupId"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadBalancerSecurityGroupId/Resource"
+   }
+  },
+  "NetworkecsClusterName6F282CB3": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-ecsClusterName",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "Networkcluster20284901"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/ecsClusterName/Resource"
+   }
+  },
+  "NetworkavailabilityZoneOneB28E7D38": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-availabilityZoneOne",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": "eu-north-1a"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/availabilityZoneOne/Resource"
+   }
+  },
+  "NetworkavailabilityZoneTwoB2F37538": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-availabilityZoneTwo",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": "eu-north-1b"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/availabilityZoneTwo/Resource"
+   }
+  },
+  "NetworkisolatedSubnetOne1D216A01": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-isolatedSubnetIdOne",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "Networkvpcstaging9isolatedSubnetSubnet1SubnetEE8E4AEA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/isolatedSubnetOne/Resource"
+   }
+  },
+  "NetworkisolatedSubnetTwo17705908": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-isolatedSubnetIdTwo",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "Networkvpcstaging9isolatedSubnetSubnet2SubnetD5D300CA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/isolatedSubnetTwo/Resource"
+   }
+  },
+  "NetworkpublicSubnetOne4469CF30": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-publicSubnetIdOne",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet1Subnet3EAF3244"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/publicSubnetOne/Resource"
+   }
+  },
+  "NetworkpublicSubnetTwo85E5FFDE": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-publicSubnetIdTwo",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "Networkvpcstaging9publicSubnetSubnet2Subnet5728CCFB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/publicSubnetTwo/Resource"
+   }
+  },
+  "NetworkloadBalancerArn7B5E48DE": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-loadBalancerArn",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Ref": "NetworkloadbalancerDDA9CA50"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadBalancerArn/Resource"
+   }
+  },
+  "NetworkloadBalancerDnsNameB2330FB1": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-loadBalancerDnsName",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Fn::GetAtt": [
+      "NetworkloadbalancerDDA9CA50",
+      "DNSName"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadBalancerDnsName/Resource"
+   }
+  },
+  "NetworkloadBalancerCanonicalHostedZoneId82D7409F": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "staging-9-Network-loadBalancerCanonicalHostedZoneId",
+    "Tags": {
+     "environment": "staging-9"
+    },
+    "Type": "String",
+    "Value": {
+     "Fn::GetAtt": [
+      "NetworkloadbalancerDDA9CA50",
+      "CanonicalHostedZoneID"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Network/loadBalancerCanonicalHostedZoneId/Resource"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ],
+    "Policies": [
+     {
+      "PolicyName": "Inline",
+      "PolicyDocument": {
+       "Version": "2012-10-17",
+       "Statement": [
+        {
+         "Effect": "Allow",
+         "Action": [
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress"
+         ],
+         "Resource": [
+          {
+           "Fn::Join": [
+            "",
+            [
+             "arn:aws:ec2:eu-north-1:127026930178:security-group/",
+             {
+              "Fn::GetAtt": [
+               "NetworkvpcCC65534B",
+               "DefaultSecurityGroup"
+              ]
+             }
+            ]
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role"
+   }
+  },
+  "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-127026930178-eu-north-1",
+     "S3Key": "ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "__entrypoint__.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Description": "Lambda function for removing all inbound/outbound rules from the VPC default security group"
+   },
+   "DependsOn": [
+    "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.ee7de53d64cc9d6248fa6aa550f92358f6c907b5efd6f3298aeab1b5e7ea358a",
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31QTW/CMAz9LdxDRhHSzqUHxLRDRRHXyU1N55EmVewUoar/fQI6yg7bye/L8VOWOlmt9GIGZ56b6jS3VOq+EDAnBWf+6NEsdX9ojcqO7pBnKo+lJVPE0qFctQntfBTcQ2lx0ictZfaGQMi7R1jlgToQnN7YOsHgUDYgeIbLeHRkqQiYzwadqAJNDCSXTfCxvZ37V9i6OiDzoNCw7jMbWTBcUyMcFFpgIWM9VCVYcIZc3S11n7atJXOr/e6hWt+8++4v/pwjFnRj5gc/+XsINcqj6BMdFHNz/f1Ars4hQINjzwcZBrVD9jEYVFlk8c1Ej+4PKw++owrDGhhVyoxSCNTk6kG9QQcvyate6CSZfTHRPEQn1KDe3ec3smOECCACAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "NetworkStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

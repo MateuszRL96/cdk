@@ -13,6 +13,12 @@
     ]
   },
   "context": {
+    "applicationName": "stacja-pojazdow9",
+    "region": "eu-north-1",
+    "accountId": "127026930178",
+    "springProfile": "default",
+    "environmentName": "staging-9",
+    "dockerImageUrl": "docker.io/mateuszrl96/stacja:stacja",
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": [

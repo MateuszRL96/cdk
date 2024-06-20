@@ -1,0 +1,306 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "NetworkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "NetworkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "NetworkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://127026930178/eu-north-1",
+      "properties": {
+        "templateFile": "NetworkStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::127026930178:role/cdk-hnb659fds-deploy-role-127026930178-eu-north-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::127026930178:role/cdk-hnb659fds-cfn-exec-role-127026930178-eu-north-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-127026930178-eu-north-1/412c55badd20c2e62c037cf95fcc7cc964c5208f0430040c66f0809717be6870.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "NetworkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::127026930178:role/cdk-hnb659fds-lookup-role-127026930178-eu-north-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "staging-9-Network"
+      },
+      "dependencies": [
+        "NetworkStack.assets"
+      ],
+      "metadata": {
+        "/NetworkStack/Network/vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkvpcCC65534B"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet1Subnet3EAF3244"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet1RouteTableD4BF1F11"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet1RouteTableAssociation2ACD26E6"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet1DefaultRoute1C6E4719"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet2Subnet5728CCFB"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet2RouteTable5A7D7D20"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet2RouteTableAssociation1A7384B6"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-publicSubnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9publicSubnetSubnet2DefaultRouteCB09FA69"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9isolatedSubnetSubnet1SubnetEE8E4AEA"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9isolatedSubnetSubnet1RouteTable38879781"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9isolatedSubnetSubnet1RouteTableAssociationCDD44245"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9isolatedSubnetSubnet2SubnetD5D300CA"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9isolatedSubnetSubnet2RouteTable4A85A378"
+          }
+        ],
+        "/NetworkStack/Network/vpc/staging-9-isolatedSubnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkvpcstaging9isolatedSubnetSubnet2RouteTableAssociationAE8BFDC8"
+          }
+        ],
+        "/NetworkStack/Network/vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkvpcIGWFEE87DAF"
+          }
+        ],
+        "/NetworkStack/Network/vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkvpcVPCGW6D90D482"
+          }
+        ],
+        "/NetworkStack/Network/vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkvpcRestrictDefaultSecurityGroupCustomResource05478EE7"
+          }
+        ],
+        "/NetworkStack/Network/cluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Networkcluster20284901"
+          }
+        ],
+        "/NetworkStack/Network/loadbalancerSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadbalancerSecurityGroup15F19417"
+          }
+        ],
+        "/NetworkStack/Network/ingressToLoadbalancer": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkingressToLoadbalancer22794D65"
+          }
+        ],
+        "/NetworkStack/Network/loadbalancer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadbalancerDDA9CA50"
+          }
+        ],
+        "/NetworkStack/Network/loadbalancer/httpListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadbalancerhttpListenerC6D4FF5F"
+          }
+        ],
+        "/NetworkStack/Network/defaultTargetGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkdefaultTargetGroup6F791668"
+          }
+        ],
+        "/NetworkStack/Network/vpcId/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkvpcId97290EC4"
+          }
+        ],
+        "/NetworkStack/Network/httpListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkhttpListener4A30BB17"
+          }
+        ],
+        "/NetworkStack/Network/httpsListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkhttpsListenerA7E1A66C"
+          }
+        ],
+        "/NetworkStack/Network/loadBalancerSecurityGroupId/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadBalancerSecurityGroupIdB25E2045"
+          }
+        ],
+        "/NetworkStack/Network/ecsClusterName/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkecsClusterName6F282CB3"
+          }
+        ],
+        "/NetworkStack/Network/availabilityZoneOne/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkavailabilityZoneOneB28E7D38"
+          }
+        ],
+        "/NetworkStack/Network/availabilityZoneTwo/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkavailabilityZoneTwoB2F37538"
+          }
+        ],
+        "/NetworkStack/Network/isolatedSubnetOne/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkisolatedSubnetOne1D216A01"
+          }
+        ],
+        "/NetworkStack/Network/isolatedSubnetTwo/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkisolatedSubnetTwo17705908"
+          }
+        ],
+        "/NetworkStack/Network/publicSubnetOne/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkpublicSubnetOne4469CF30"
+          }
+        ],
+        "/NetworkStack/Network/publicSubnetTwo/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkpublicSubnetTwo85E5FFDE"
+          }
+        ],
+        "/NetworkStack/Network/loadBalancerArn/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadBalancerArn7B5E48DE"
+          }
+        ],
+        "/NetworkStack/Network/loadBalancerDnsName/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadBalancerDnsNameB2330FB1"
+          }
+        ],
+        "/NetworkStack/Network/loadBalancerCanonicalHostedZoneId/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NetworkloadBalancerCanonicalHostedZoneId82D7409F"
+          }
+        ],
+        "/NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/NetworkStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/NetworkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/NetworkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/NetworkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "NetworkStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

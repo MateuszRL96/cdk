@@ -1,0 +1,508 @@
+{
+ "Parameters": {
+  "vpcIdParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-vpcId"
+  },
+  "httpListenerArnParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-httpListenerArn"
+  },
+  "httpsListenerArnParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-httpsListenerArn"
+  },
+  "loadBalancerSecurityGroupIdParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-loadBalancerSecurityGroupId"
+  },
+  "ecsClusterNameParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-ecsClusterName"
+  },
+  "isolatedSubnetIdOneParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-isolatedSubnetIdOne"
+  },
+  "isolatedSubnetIdTwoParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-isolatedSubnetIdTwo"
+  },
+  "publicSubnetIdOneParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-publicSubnetIdOne"
+  },
+  "publicSubnetIdTwoParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-publicSubnetIdTwo"
+  },
+  "availabilityZoneOneParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-availabilityZoneOne"
+  },
+  "availabilityZoneTwoParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-availabilityZoneTwo"
+  },
+  "loadBalancerArnParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-loadBalancerArn"
+  },
+  "loadBalancerDnsNameParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-loadBalancerDnsName"
+  },
+  "loadBalancerCanonicalHostedZoneIdParameter": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "staging-5-Network-loadBalancerCanonicalHostedZoneId"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Resources": {
+  "ServicetargetGroupA8A17F03": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckIntervalSeconds": 30,
+    "HealthCheckPath": "/",
+    "HealthCheckPort": "8080",
+    "HealthCheckProtocol": "HTTP",
+    "HealthCheckTimeoutSeconds": 5,
+    "HealthyThresholdCount": 2,
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ],
+    "TargetGroupAttributes": [
+     {
+      "Key": "deregistration_delay.timeout_seconds",
+      "Value": "5"
+     }
+    ],
+    "TargetType": "ip",
+    "UnhealthyThresholdCount": 8,
+    "VpcId": {
+     "Ref": "vpcIdParameter"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/targetGroup"
+   }
+  },
+  "ServicehttpsListenerRule888D8DF6": {
+   "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+   "Properties": {
+    "Actions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "ServicetargetGroupA8A17F03"
+      },
+      "Type": "forward"
+     }
+    ],
+    "Conditions": [
+     {
+      "Field": "path-pattern",
+      "Values": [
+       "*"
+      ]
+     }
+    ],
+    "ListenerArn": {
+     "Ref": "httpsListenerArnParameter"
+    },
+    "Priority": 1
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/httpsListenerRule"
+   },
+   "Condition": "ServicehttpsListenerRuleConditionF9544705"
+  },
+  "ServicehttpListenerRule46A86AF4": {
+   "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+   "Properties": {
+    "Actions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "ServicetargetGroupA8A17F03"
+      },
+      "Type": "forward"
+     }
+    ],
+    "Conditions": [
+     {
+      "Field": "path-pattern",
+      "Values": [
+       "*"
+      ]
+     }
+    ],
+    "ListenerArn": {
+     "Ref": "httpListenerArnParameter"
+    },
+    "Priority": 2
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/httpListenerRule"
+   }
+  },
+  "ServiceecsLogGroup1EA96AB9": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "staging-5-stacja-pojazdow-logs",
+    "RetentionInDays": 7,
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsLogGroup/Resource"
+   }
+  },
+  "ServiceecsTaskExecutionRole0EBE7C5D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Path": "/",
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:BatchGetImage",
+          "ecr:GetAuthorizationToken",
+          "ecr:GetDownloadUrlForLayer",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+         ],
+         "Effect": "Allow",
+         "Resource": "*"
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "staging-5-stacja-pojazdow-ecsTaskExecutionRolePolicy"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsTaskExecutionRole/Resource"
+   }
+  },
+  "ServiceecsTaskRole4E8999D2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Path": "/",
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsTaskRole/Resource"
+   }
+  },
+  "ServicetaskDefinitionC6531610": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Cpu": 256,
+      "Environment": [
+       {
+        "Name": "SPRING_PROFILES_ACTIVE",
+        "Value": "default"
+       }
+      ],
+      "Image": "docker.io/mateuszrl96/stacja:latest",
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-stream-prefix": "staging-5-stacja-pojazdow-stream",
+        "awslogs-group": {
+         "Ref": "ServiceecsLogGroup1EA96AB9"
+        },
+        "awslogs-region": "eu-north-1",
+        "awslogs-datetime-format": "%Y-%m-%dT%H:%M:%S.%f%z"
+       }
+      },
+      "Memory": 512,
+      "Name": "staging-5-stacja-pojazdow-container",
+      "PortMappings": [
+       {
+        "ContainerPort": 8080
+       }
+      ],
+      "StopTimeout": 2
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "ServiceecsTaskExecutionRole0EBE7C5D",
+      "Arn"
+     ]
+    },
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "ServiceecsTaskRole4E8999D2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/taskDefinition"
+   }
+  },
+  "ServiceecsSecurityGroup6D8FF04D": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "SecurityGroup for the ECS containers",
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ],
+    "VpcId": {
+     "Ref": "vpcIdParameter"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsSecurityGroup"
+   }
+  },
+  "ServiceecsIngressFromSelf8949B55F": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ServiceecsSecurityGroup6D8FF04D",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "-1",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ServiceecsSecurityGroup6D8FF04D",
+      "GroupId"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsIngressFromSelf"
+   }
+  },
+  "ServiceecsIngressFromLoadbalancer62209FDD": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "ServiceecsSecurityGroup6D8FF04D",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "-1",
+    "SourceSecurityGroupId": {
+     "Ref": "loadBalancerSecurityGroupIdParameter"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsIngressFromLoadbalancer"
+   }
+  },
+  "ServiceecsService30915DD1": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "ecsClusterNameParameter"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 2,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "staging-5-stacja-pojazdow-container",
+      "ContainerPort": 8080,
+      "TargetGroupArn": {
+       "Ref": "ServicetargetGroupA8A17F03"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "ServiceecsSecurityGroup6D8FF04D",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "publicSubnetIdOneParameter"
+       },
+       {
+        "Ref": "publicSubnetIdTwoParameter"
+       }
+      ]
+     }
+    },
+    "Tags": [
+     {
+      "Key": "application",
+      "Value": "stacja-pojazdow"
+     },
+     {
+      "Key": "environment",
+      "Value": "staging-5"
+     }
+    ],
+    "TaskDefinition": {
+     "Ref": "ServicetaskDefinitionC6531610"
+    }
+   },
+   "DependsOn": [
+    "ServicehttpListenerRule46A86AF4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/Service/ecsService"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WP0WrDMAxFv6XvjteUwj4gg7HRh5LsvaiOYrQ48rDslGL878Nr17GnK+4RR2in2/1ebzdwkcaMc+PorPMQwcyqm/gIARaMGFSP4lMwqOAip4wOJJJxHsYzOGBDbNedzt3EHxAsxtfg01c1HEgiMoY+OSzKeSs6H7z94/e5KIJF5947rHXNotDI3SnzC07EFMlz5QOGlczPyu3sgCYFiteH+F/xxjagSCmVdJ7Hh+j3r6LeYYWn9llvddtuPoWoCYkjLaj7W34DVZATQSsBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServiceStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Conditions": {
+  "ServicehttpsListenerRuleConditionF9544705": {
+   "Fn::Not": [
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "httpsListenerArnParameter"
+      },
+      "null"
+     ]
+    }
+   ]
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
